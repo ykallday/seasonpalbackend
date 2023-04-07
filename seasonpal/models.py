@@ -23,14 +23,14 @@ class Produce(models.Model):
         return self.name
     
 class Note(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='author', default = 0)
-    produce = models.ForeignKey(Produce, on_delete=models.CASCADE, related_name='subject', default = 0)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='note', default = 0)
+    produce = models.ForeignKey(Produce, on_delete=models.CASCADE, related_name='favorite', default = 0)
     content = models.TextField()
     def __str__(self):
         return self.produce
 
 class Suggestion(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='by', default = 0)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='suggestion', default = 0)
     content = models.TextField()
     category = models.TextField()
     def __str__(self):
