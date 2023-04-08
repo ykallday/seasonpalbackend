@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer
 
 
-class ObtainTokenPairWithColorView(TokenObtainPairView):
+class ObtainTokenPairWithLocView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
