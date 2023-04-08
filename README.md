@@ -34,5 +34,5 @@ I created this app with Python/Django for the backend, and Render to deploy the 
 [Figma](https://www.figma.com) (CHD & Wireframe)
 [Draw.io](https://www.draw.io) (ERD)
 [SeasonalFoodGuide.org](https://www.seasonalfoodguide.org/)
-[JWT Auth](https://medium.com/@ronakchitlangya1997/jwt-authentication-with-react-js-and-django-c034aae1e60d)
+[JWT Auth](https://hackernoon.com/110percent-complete-jwt-authentication-with-django-and-react-2020-iejq34ta)
 [Django Deployment](https://www.youtube.com/watch?v=bE8UllxfFC8)
