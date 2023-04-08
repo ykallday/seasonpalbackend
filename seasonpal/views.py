@@ -27,3 +27,4 @@ class CustomUserCreate(APIView):
 class RestrictedView(APIView):
     def get(self, request):
         return Response(data={'Hello':'World'}, status = status.HTTP_200_OK)
+

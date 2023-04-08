@@ -4,4 +4,8 @@ class CustomUserAdmin(admin.ModelAdmin):
     model = CustomUser
 # Register your models here.
 admin.site.register(CustomUser, CustomUserAdmin)
-admin.site.register(SeasonLocation, Produce, Note, Suggestion, Resource)
+admin.site.register(SeasonLocation)
+admin.site.register(Produce)
+admin.site.register(Note)
+admin.site.register(Suggestion)
+admin.site.register(Resource)
