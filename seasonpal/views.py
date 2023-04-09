@@ -4,9 +4,9 @@ from django.shortcuts import render
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import permissions, status
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.views import APIView, generics
 from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer
-
+from .models import CustomUser
 
 class ObtainTokenPairWithLocView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
@@ -28,3 +28,11 @@ class RestrictedView(APIView):
     def get(self, request):
         return Response(data={'Hello':'World'}, status = status.HTTP_200_OK)
 
+
+class UserList (generics.ListCreateAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+
+class UserDetail (generics.RetrieveUpdateDestroyAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
