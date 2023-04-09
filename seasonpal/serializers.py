@@ -46,16 +46,23 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields=('id','user_url','username', 'password', 'location', 'notes', 'suggestions' )
 
 
+class SeasonLocationSerializer (serializers.HyperlinkedModelSerializer):
+    seasonlocation_url = serializers.ModelSerializer.serializer_url_field(
+        view_name = 'seasonlocation_detail'
+    )
+    class Meta:
+        model = SeasonLocation
+        fields=('id','seasonlocation_url','season', 'location', 'combo')
+
+
 class ProduceSerializer(serializers.HyperlinkedModelSerializer):
-    seasonlocations = serializers.HyperlinkedRelatedField(
-        view_name = 'season_location_detail',
+    seasonlocations = SeasonLocationSerializer(
         many=True,
         read_only=True
     )
     produce_url = serializers.ModelSerializer.serializer_url_field(
         view_name = 'produce_detail'
     )
-
     class Meta:
         model = Produce
         fields=('id','produce_url','name', 'category', 'image_url', 'description', 'seasonlocations')
@@ -94,15 +101,6 @@ class SuggestionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Suggestion
         fields=('id','suggestion_url', 'content', 'category', 'user')
-
-
-class SeasonLocationSerializer (serializers.HyperlinkedModelSerializer):
-    seasonlocation_url = serializers.ModelSerializer.serializer_url_field(
-        view_name = 'seasonlocation_detail'
-    )
-    class Meta:
-        model = SeasonLocation
-        fields=('id','seasonlocation_url','season', 'location', 'combo')
 
 
 class ResourceSerializer (serializers.HyperlinkedModelSerializer):

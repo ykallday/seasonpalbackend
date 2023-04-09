@@ -8,7 +8,7 @@ class CustomUser(AbstractUser):
 class SeasonLocation(models.Model):
     location = models.CharField(max_length=100)
     season = models.CharField(max_length=100)
-    combo = models.CharField(max_length=100)
+    combo = models.CharField(max_length=100, unique=True)
    
     def __str__(self):
         return (self.combo)
