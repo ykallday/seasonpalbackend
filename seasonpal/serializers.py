@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import CustomUser, Produce
+from .models import CustomUser, Produce, Note, Suggestion, SeasonLocation, Resource
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -52,7 +52,63 @@ class ProduceSerializer(serializers.HyperlinkedModelSerializer):
         many=True,
         read_only=True
     )
+    produce_url = serializers.ModelSerializer.serializer_url_field(
+        view_name = 'produce_detail'
+    )
 
     class Meta:
         model = Produce
-        fields=('id','name', 'category', 'image_url', 'description', 'seasonlocations')
+        fields=('id','produce_url','name', 'category', 'image_url', 'description', 'seasonlocations')
+
+class NoteSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.HyperlinkedRelatedField(
+        view_name = 'user_detail',
+        read_only=True
+    )
+    produce = serializers.HyperlinkedRelatedField(
+        view_name = 'produce_detail',
+        read_only=True
+    )
+    note_url = serializers.ModelSerializer.serializer_url_field(
+        view_name = 'note_detail'
+    )
+
+
+    class Meta:
+        model = Note
+        fields=('id','note_url', 'content', 'produce', 'user')
+
+
+
+class SuggestionSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.HyperlinkedRelatedField(
+        view_name = 'user_detail',
+        read_only=True
+    )
+
+    suggestion_url = serializers.ModelSerializer.serializer_url_field(
+        view_name = 'suggestion_detail'
+    )
+
+
+    class Meta:
+        model = Suggestion
+        fields=('id','suggestion_url', 'content', 'category', 'user')
+
+
+class SeasonLocationSerializer (serializers.HyperlinkedModelSerializer):
+    seasonlocation_url = serializers.ModelSerializer.serializer_url_field(
+        view_name = 'seasonlocation_detail'
+    )
+    class Meta:
+        model = SeasonLocation
+        fields=('id','seasonlocation_url','season', 'location')
+
+
+class ResourceSerializer (serializers.HyperlinkedModelSerializer):
+    resource_url = serializers.ModelSerializer.serializer_url_field(
+        view_name = 'resource_detail'
+    )
+    class Meta:
+        model = Resource
+        fields=('id','resource_url','title','category', 'small_img', 'main_img', 'content', 'opt_link')

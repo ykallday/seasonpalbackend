@@ -6,8 +6,8 @@ from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
-from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer, ProduceSerializer
-from .models import CustomUser, Produce
+from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer, ProduceSerializer, NoteSerializer,SuggestionSerializer, SeasonLocationSerializer, ResourceSerializer
+from .models import CustomUser, Produce, Note, Suggestion, SeasonLocation, Resource
 
 class ObtainTokenPairWithLocView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
@@ -45,3 +45,36 @@ class ProduceList (generics.ListCreateAPIView):
 class ProduceDetail (generics.RetrieveUpdateDestroyAPIView):
     queryset = Produce.objects.all()
     serializer_class = ProduceSerializer
+
+class NoteList (generics.ListCreateAPIView):
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
+
+class NoteDetail (generics.RetrieveUpdateDestroyAPIView):
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
+
+class SuggestionList (generics.ListCreateAPIView):
+    queryset = Suggestion.objects.all()
+    serializer_class = SuggestionSerializer
+
+class SuggestionDetail (generics.RetrieveUpdateDestroyAPIView):
+    queryset = Suggestion.objects.all()
+    serializer_class = SuggestionSerializer
+
+
+class SeasonLocationList (generics.ListCreateAPIView):
+    queryset = SeasonLocation.objects.all()
+    serializer_class = SeasonLocationSerializer
+
+class SeasonLocationDetail (generics.RetrieveUpdateDestroyAPIView):
+    queryset = SeasonLocation.objects.all()
+    serializer_class = SeasonLocationSerializer
+
+class ResourceList (generics.ListCreateAPIView):
+    queryset = Resource.objects.all()
+    serializer_class = ResourceSerializer
+
+class ResourceDetail (generics.RetrieveUpdateDestroyAPIView):
+    queryset = Resource.objects.all()
+    serializer_class = ResourceSerializer
