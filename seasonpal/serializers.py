@@ -102,7 +102,7 @@ class SeasonLocationSerializer (serializers.HyperlinkedModelSerializer):
     )
     class Meta:
         model = SeasonLocation
-        fields=('id','seasonlocation_url','season', 'location')
+        fields=('id','seasonlocation_url','season', 'location', 'combo')
 
 
 class ResourceSerializer (serializers.HyperlinkedModelSerializer):
