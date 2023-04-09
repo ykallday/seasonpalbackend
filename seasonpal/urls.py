@@ -9,5 +9,7 @@ urlpatterns = [
     path('token/obtain/', ObtainTokenPairWithLocView.as_view(), name='token_create'),
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('users/', views.UserList.as_view(), name='user_list'),
-    path('users/<int:pk/', views.UserDetail.as_view(), name='user_detail')
+    path('users/<int:pk/', views.UserDetail.as_view(), name='user_detail'),
+    path('produce/', views.ProduceList.as_view(), name='produce_list'),
+    path('produce/<int:pk/', views.ProduceDetail.as_view(), name='produce_detail')
 ]

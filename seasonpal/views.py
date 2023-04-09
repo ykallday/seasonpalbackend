@@ -4,9 +4,10 @@ from django.shortcuts import render
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import permissions, status
 from rest_framework.response import Response
-from rest_framework.views import APIView, generics
-from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer
-from .models import CustomUser
+from rest_framework.views import APIView
+from rest_framework import generics
+from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer, ProduceSerializer
+from .models import CustomUser, Produce
 
 class ObtainTokenPairWithLocView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
@@ -36,3 +37,11 @@ class UserList (generics.ListCreateAPIView):
 class UserDetail (generics.RetrieveUpdateDestroyAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
+
+class ProduceList (generics.ListCreateAPIView):
+    queryset = Produce.objects.all()
+    serializer_class = ProduceSerializer
+
+class ProduceDetail (generics.RetrieveUpdateDestroyAPIView):
+    queryset = Produce.objects.all()
+    serializer_class = ProduceSerializer

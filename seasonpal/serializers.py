@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import CustomUser
+from .models import CustomUser, Produce
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -27,3 +27,32 @@ class CustomUserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    notes = serializers.HyperlinkedRelatedField(
+        view_name = 'note_detail',
+        many=True,
+        read_only=True
+    )
+    suggestions = serializers.HyperlinkedRelatedField(
+        view_name = 'suggestion_detail',
+        many=True,
+        read_only=True
+    )
+    user_url = serializers.ModelSerializer.serializer_url_field(
+        view_name = 'user_detail'
+    )
+    class Meta:
+        model = CustomUser
+        fields=('id','user_url','username', 'password', 'location', 'notes', 'suggestions' )
+
+
+class ProduceSerializer(serializers.HyperlinkedModelSerializer):
+    seasonlocations = serializers.HyperlinkedRelatedField(
+        view_name = 'season_location_detail',
+        many=True,
+        read_only=True
+    )
+
+    class Meta:
+        model = Produce
+        fields=('id','name', 'category', 'image_url', 'description', 'seasonlocations')
