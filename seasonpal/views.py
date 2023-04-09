@@ -3,6 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import permissions, status
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
@@ -14,7 +15,7 @@ class ObtainTokenPairWithLocView(TokenObtainPairView):
 
 
 class CustomUserCreate(APIView):
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.AllowAny)
 
     def post(self, request, format='json'):
         serializer = CustomUserSerializer(data=request.data)
@@ -31,6 +32,7 @@ class RestrictedView(APIView):
 
 
 class UserList (generics.ListCreateAPIView):
+    permission_classes = [AllowAny]
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
 
