@@ -8,11 +8,11 @@ class CustomUser(AbstractUser):
     
 
 class Produce(models.Model):
-    name = models.CharField(blank=True,max_length=100)
+    name = models.CharField(blank=True,max_length=100, unique=True)
     category = models.CharField(blank=True,max_length=100)
     image_url = models.TextField()
     description = models.TextField()
-   
+    more_info = models.TextField(blank=True)
     def __str__(self):
         return self.name
 

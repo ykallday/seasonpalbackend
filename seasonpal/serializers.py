@@ -56,7 +56,7 @@ class ProduceSerializer(serializers.HyperlinkedModelSerializer):
     )
     class Meta:
         model = Produce
-        fields=('id','produce_url','name', 'category', 'image_url', 'description')
+        fields=('id','produce_url','name', 'category', 'image_url', 'description', 'more_info')
 
 class SeasonLocationSerializer (serializers.HyperlinkedModelSerializer):
     produce = ProduceSerializer(
