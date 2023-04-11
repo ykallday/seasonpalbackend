@@ -12,7 +12,9 @@ class Produce(models.Model):
     category = models.CharField(blank=True,max_length=100)
     image_url = models.TextField()
     description = models.TextField()
-    more_info = models.TextField(blank=True)
+    link1 = models.TextField(blank=True)
+    link2 = models.TextField(blank=True)
+    link3 = models.TextField(blank=True)
     def __str__(self):
         return self.name
 
