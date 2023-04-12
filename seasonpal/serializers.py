@@ -12,12 +12,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class CustomUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
     username = serializers.CharField()
-    password = serializers.CharField(min_length=8, write_only=True)
+    password = serializers.CharField(min_length=8)
     location = serializers.CharField()
     class Meta:
         model = CustomUser
         fields = ('email', 'username', 'password', 'location')
-        extra_kwargs = {'password': {'write_only': True}}
+        # extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)

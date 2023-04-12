@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
-from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer, ProduceSerializer, NoteSerializer,SuggestionSerializer, SeasonLocationSerializer, ResourceSerializer
+from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer, ProduceSerializer, NoteSerializer,SuggestionSerializer, SeasonLocationSerializer, ResourceSerializer, UserSerializer
 from .models import CustomUser, Produce, Note, Suggestion, SeasonLocation, Resource
 
 class ObtainTokenPairWithLocView(TokenObtainPairView):
@@ -34,11 +34,11 @@ class RestrictedView(APIView):
 class UserList (generics.ListCreateAPIView):
     permission_classes = [AllowAny]
     queryset = CustomUser.objects.all()
-    serializer_class = CustomUserSerializer
+    serializer_class = UserSerializer
 
 class UserDetail (generics.RetrieveUpdateDestroyAPIView):
     queryset = CustomUser.objects.all()
-    serializer_class = CustomUserSerializer
+    serializer_class = UserSerializer
 
 class ProduceList (generics.ListCreateAPIView):
     queryset = Produce.objects.all()

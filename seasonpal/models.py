@@ -4,7 +4,8 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class CustomUser(AbstractUser):
     location = models.CharField(blank=True, max_length=120)
-
+    def __str__(self):
+        return self.username
     
 
 class Produce(models.Model):
