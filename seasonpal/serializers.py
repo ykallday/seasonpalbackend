@@ -82,7 +82,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     )
     class Meta:
         model = CustomUser
-        fields=('id','user_url','username', 'password', 'location' )
+        fields=('id','user_url','username', 'password', 'location', 'notes', 'suggestions' )
 
 
 class ProduceSerializer(serializers.HyperlinkedModelSerializer):
