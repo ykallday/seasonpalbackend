@@ -4,6 +4,11 @@ from .models import CustomUser, Produce, Note, Suggestion, SeasonLocation, Resou
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    user = serializers.HyperlinkedRelatedField(
+        view_name = 'user_detail',
+        read_only=True
+    )
+
     def get_token(cls, user):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
         return token
@@ -25,6 +30,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+    
 class NoteSerializer(serializers.HyperlinkedModelSerializer):
     user = serializers.HyperlinkedRelatedField(
         view_name = 'user_detail',
@@ -60,7 +66,7 @@ class SuggestionSerializer(serializers.HyperlinkedModelSerializer):
         model = Suggestion
         fields=('id','suggestion_url', 'content', 'category', 'user')
 
-        
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     notes = NoteSerializer(
         many=True,
@@ -76,7 +82,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     )
     class Meta:
         model = CustomUser
-        fields=('id','user_url','username', 'password', 'location', 'notes', 'suggestions' )
+        fields=('id','user_url','username', 'password', 'location' )
 
 
 class ProduceSerializer(serializers.HyperlinkedModelSerializer):

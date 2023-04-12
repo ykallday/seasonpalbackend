@@ -15,7 +15,8 @@ class ObtainTokenPairWithLocView(TokenObtainPairView):
 
 
 class CustomUserCreate(APIView):
-    permission_classes = (permissions.AllowAny)
+
+    permission_classes = [AllowAny]
 
     def post(self, request, format='json'):
         serializer = CustomUserSerializer(data=request.data)
@@ -25,6 +26,8 @@ class CustomUserCreate(APIView):
                 json = serializer.data
                 return Response(json, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+ 
     
 class RestrictedView(APIView):
     def get(self, request):
