@@ -6,18 +6,17 @@ from .models import CustomUser, Produce, Note, Suggestion, SeasonLocation, Resou
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
-        token['location'] = user.location
         return token
     
 class CustomUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
     username = serializers.CharField()
-    password = serializers.CharField(min_length=8)
+    password = serializers.CharField(min_length=8, write_only=True)
     location = serializers.CharField()
     class Meta:
         model = CustomUser
         fields = ('email', 'username', 'password', 'location')
-        # extra_kwargs = {'password': {'write_only': True}}
+        extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)
@@ -26,50 +25,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    notes = serializers.HyperlinkedRelatedField(
-        view_name = 'note_detail',
-        many=True,
-        read_only=True
-    )
-    suggestions = serializers.HyperlinkedRelatedField(
-        view_name = 'suggestion_detail',
-        many=True,
-        read_only=True
-    )
-    user_url = serializers.ModelSerializer.serializer_url_field(
-        view_name = 'user_detail'
-    )
-    class Meta:
-        model = CustomUser
-        fields=('id','user_url','username', 'password', 'location', 'notes', 'suggestions' )
-
-
-class ProduceSerializer(serializers.HyperlinkedModelSerializer):
-    # seasonlocations = SeasonLocationSerializer(
-    #     many=True,
-    #     read_only=True
-    # )
-    produce_url = serializers.ModelSerializer.serializer_url_field(
-        view_name = 'produce_detail'
-    )
-    class Meta:
-        model = Produce
-        fields=('id','produce_url','name', 'category', 'image_url', 'description', 'link1', 'link2','link3')
-
-class SeasonLocationSerializer (serializers.HyperlinkedModelSerializer):
-    produce = ProduceSerializer(
-        many=True,
-        read_only=True
-    )
-    seasonlocation_url = serializers.ModelSerializer.serializer_url_field(
-        view_name = 'seasonlocation_detail'
-    )
-    class Meta:
-        model = SeasonLocation
-        fields=('id','seasonlocation_url','season', 'location', 'combo', 'produce')
-
 class NoteSerializer(serializers.HyperlinkedModelSerializer):
     user = serializers.HyperlinkedRelatedField(
         view_name = 'user_detail',
@@ -104,6 +59,47 @@ class SuggestionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Suggestion
         fields=('id','suggestion_url', 'content', 'category', 'user')
+
+        
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    notes = NoteSerializer(
+        many=True,
+        read_only=True
+    )
+    suggestions = SuggestionSerializer(
+        many=True,
+        read_only=True
+    )
+    
+    user_url = serializers.ModelSerializer.serializer_url_field(
+        view_name = 'user_detail'
+    )
+    class Meta:
+        model = CustomUser
+        fields=('id','user_url','username', 'password', 'location', 'notes', 'suggestions' )
+
+
+class ProduceSerializer(serializers.HyperlinkedModelSerializer):
+    produce_url = serializers.ModelSerializer.serializer_url_field(
+        view_name = 'produce_detail'
+    )
+    class Meta:
+        model = Produce
+        fields=('id','produce_url','name', 'category', 'image_url', 'description', 'link1', 'link2','link3')
+
+class SeasonLocationSerializer (serializers.HyperlinkedModelSerializer):
+    produce = ProduceSerializer(
+        many=True,
+        read_only=True
+    )
+    seasonlocation_url = serializers.ModelSerializer.serializer_url_field(
+        view_name = 'seasonlocation_detail'
+    )
+    class Meta:
+        model = SeasonLocation
+        fields=('id','seasonlocation_url','season', 'location', 'combo', 'produce')
+
+
 
 
 class ResourceSerializer (serializers.HyperlinkedModelSerializer):
