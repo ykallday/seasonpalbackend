@@ -56,6 +56,7 @@ class NoteList (generics.ListCreateAPIView):
     serializer_class = NoteSerializer
 
 class NoteDetail (generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [AllowAny]
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
 
@@ -65,6 +66,7 @@ class SuggestionList (generics.ListCreateAPIView):
     serializer_class = SuggestionSerializer
 
 class SuggestionDetail (generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [AllowAny]
     queryset = Suggestion.objects.all()
     serializer_class = SuggestionSerializer
 
