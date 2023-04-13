@@ -107,7 +107,7 @@ class NoteSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Note
-        fields=('id','note_url', 'content', 'produce', 'user')
+        fields=('id','note_url', 'content', 'produce', 'name','user')
 
 
 class ResourceSerializer (serializers.HyperlinkedModelSerializer):

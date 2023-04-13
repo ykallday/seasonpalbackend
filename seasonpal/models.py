@@ -30,6 +30,7 @@ class SeasonLocation(models.Model):
 class Note(models.Model):
     user = models.IntegerField()
     produce = models.IntegerField()
+    name = models.CharField(max_length=100, blank=True)
     content = models.TextField()
     def __str__(self):
         return self.content
