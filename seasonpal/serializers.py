@@ -49,10 +49,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class NoteSerializer(serializers.HyperlinkedModelSerializer):
-    # user = serializers.HyperlinkedRelatedField(
-    #     view_name = 'user_detail',
-    #     read_only=True
-    # )
     user = UserSerializer(
         read_only=True
     )
