@@ -28,8 +28,8 @@ class SeasonLocation(models.Model):
         return (self.combo)
     
 class Note(models.Model):
-    user = models.CharField(max_length=100)
-    produce = models.CharField(max_length=100)
+    user = models.IntegerField()
+    produce = models.IntegerField()
     content = models.TextField()
     def __str__(self):
         return self.content
