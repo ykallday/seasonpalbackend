@@ -28,14 +28,14 @@ class SeasonLocation(models.Model):
         return (self.combo)
     
 class Note(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='note', blank=True, default = 1)
-    produce = models.ForeignKey(Produce, on_delete=models.CASCADE, related_name='favorite', blank=True, default = 1)
+    user = models.CharField(max_length=100)
+    produce = models.CharField(max_length=100)
     content = models.TextField()
     def __str__(self):
         return self.content
 
 class Suggestion(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='suggestion', default = 0)
+    user = models.CharField(max_length=100)
     content = models.TextField()
     category = models.TextField()
     def __str__(self):

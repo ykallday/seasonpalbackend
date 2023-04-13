@@ -57,9 +57,9 @@ class SuggestionSerializer(serializers.HyperlinkedModelSerializer):
     #     view_name = 'user_detail',
     #     read_only=True
     # )
-    user = UserSerializer(
-        read_only=True
-    )
+    # user = UserSerializer(
+    #     read_only=True
+    # )
     suggestion_url = serializers.ModelSerializer.serializer_url_field(
         view_name = 'suggestion_detail'
     )
@@ -93,12 +93,12 @@ class SeasonLocationSerializer (serializers.HyperlinkedModelSerializer):
         fields=('id','seasonlocation_url','season', 'location', 'combo', 'produce')
 
 class NoteSerializer(serializers.HyperlinkedModelSerializer):
-    user = UserSerializer(
-        read_only=True
-    )
-    produce = ProduceSerializer(
-        read_only=True
-    )
+    # user = UserSerializer(
+    #     read_only=True
+    # )
+    # produce = ProduceSerializer(
+    #     read_only=True
+    # )
     
     note_url = serializers.ModelSerializer.serializer_url_field(
         view_name = 'note_detail'
