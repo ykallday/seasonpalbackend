@@ -26,6 +26,8 @@ class CustomUserCreate(APIView):
                 return Response(json, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
+
 class RestrictedView(APIView):
     def get(self, request):
         return Response(data={'Hello':'World'}, status = status.HTTP_200_OK)

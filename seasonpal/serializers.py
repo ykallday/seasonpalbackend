@@ -30,10 +30,30 @@ class CustomUserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
-    
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    notes = serializers.HyperlinkedRelatedField(
+        view_name = 'note_detail',
+        read_only=True
+    )
+    suggestions = serializers.HyperlinkedRelatedField(
+        view_name = 'suggestion_detail',
+        read_only=True
+    )
+    user_url = serializers.ModelSerializer.serializer_url_field(
+        view_name = 'user_detail'
+    )
+    class Meta:
+        model = CustomUser
+        fields=('id','user_url','username', 'password', 'location', 'notes', 'suggestions' )
+
+
 class NoteSerializer(serializers.HyperlinkedModelSerializer):
-    user = serializers.HyperlinkedRelatedField(
-        view_name = 'user_detail',
+    # user = serializers.HyperlinkedRelatedField(
+    #     view_name = 'user_detail',
+    #     read_only=True
+    # )
+    user = UserSerializer(
         read_only=True
     )
     produce = serializers.HyperlinkedRelatedField(
@@ -52,11 +72,13 @@ class NoteSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class SuggestionSerializer(serializers.HyperlinkedModelSerializer):
-    user = serializers.HyperlinkedRelatedField(
-        view_name = 'user_detail',
+    # user = serializers.HyperlinkedRelatedField(
+    #     view_name = 'user_detail',
+    #     read_only=True
+    # )
+    user = UserSerializer(
         read_only=True
     )
-
     suggestion_url = serializers.ModelSerializer.serializer_url_field(
         view_name = 'suggestion_detail'
     )
@@ -67,22 +89,6 @@ class SuggestionSerializer(serializers.HyperlinkedModelSerializer):
         fields=('id','suggestion_url', 'content', 'category', 'user')
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    notes = NoteSerializer(
-        many=True,
-        read_only=True
-    )
-    suggestions = SuggestionSerializer(
-        many=True,
-        read_only=True
-    )
-    
-    user_url = serializers.ModelSerializer.serializer_url_field(
-        view_name = 'user_detail'
-    )
-    class Meta:
-        model = CustomUser
-        fields=('id','user_url','username', 'password', 'location', 'notes', 'suggestions' )
 
 
 class ProduceSerializer(serializers.HyperlinkedModelSerializer):
