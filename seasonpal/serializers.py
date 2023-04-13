@@ -48,12 +48,19 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields=('id','user_url','username', 'password', 'location', 'notes', 'suggestions' )
 
 
+class ProduceSerializer(serializers.HyperlinkedModelSerializer):
+    produce_url = serializers.ModelSerializer.serializer_url_field(
+        view_name = 'produce_detail'
+    )
+    class Meta:
+        model = Produce
+        fields=('id','produce_url','name', 'category', 'image_url', 'description', 'link1', 'link2','link3')
+        
 class NoteSerializer(serializers.HyperlinkedModelSerializer):
     user = UserSerializer(
         read_only=True
     )
-    produce = serializers.HyperlinkedRelatedField(
-        view_name = 'produce_detail',
+    produce = ProduceSerializer(
         read_only=True
     )
     note_url = serializers.ModelSerializer.serializer_url_field(
@@ -87,13 +94,6 @@ class SuggestionSerializer(serializers.HyperlinkedModelSerializer):
 
 
 
-class ProduceSerializer(serializers.HyperlinkedModelSerializer):
-    produce_url = serializers.ModelSerializer.serializer_url_field(
-        view_name = 'produce_detail'
-    )
-    class Meta:
-        model = Produce
-        fields=('id','produce_url','name', 'category', 'image_url', 'description', 'link1', 'link2','link3')
 
 class SeasonLocationSerializer (serializers.HyperlinkedModelSerializer):
     produce = ProduceSerializer(
