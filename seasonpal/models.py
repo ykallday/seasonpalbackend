@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     location = models.CharField(blank=True, max_length=120)
     def __str__(self):
-        return self.username
+        return self.id
     
 
 class Produce(models.Model):
@@ -38,7 +38,7 @@ class Note(models.Model):
         return self.content
 
 class Suggestion(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='author')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user', blank=True, null=True)
     content = models.TextField()
     category = models.TextField()
     def __str__(self):
