@@ -38,7 +38,7 @@ class Note(models.Model):
         return self.content
 
 class Suggestion(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user', blank=True, null=True, default = 1)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user', blank=True, default = 1)
     content = models.TextField()
     category = models.TextField()
     def __str__(self):
