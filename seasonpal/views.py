@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
 from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer, ProduceSerializer, NoteSerializer,SuggestionSerializer, SeasonLocationSerializer, ResourceSerializer, UserSerializer
-from .models import CustomUser, Produce, Note, Suggestion, SeasonLocation, Resource
+from .models import CustomUser, Produce, Note, Suggestion, SeasonLocation, Resource, AbstractUser
 
 class ObtainTokenPairWithLocView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
