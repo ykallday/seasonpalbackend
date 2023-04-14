@@ -53,13 +53,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class SuggestionSerializer(serializers.HyperlinkedModelSerializer):
-    # user = serializers.HyperlinkedRelatedField(
-    #     view_name = 'user_detail',
-    #     read_only=True
-    # )
-    # user = UserSerializer(
-    #     read_only=True
-    # )
+
+    user = UserSerializer(
+        read_only=True
+    )
     suggestion_url = serializers.ModelSerializer.serializer_url_field(
         view_name = 'suggestion_detail'
     )
