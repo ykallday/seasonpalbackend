@@ -30,15 +30,16 @@ class SeasonLocation(models.Model):
 class Note(models.Model):
     #  user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user', null=True, blank =True)
     # produce = models.ForeignKey(Produce, on_delete=models.CASCADE, related_name='produce', null=True, blank =True)
-    user = models.IntegerField()
-    produce = models.IntegerField()
+    user = models.IntegerField(null=True)
+    produce = models.IntegerField(null=True)
     name = models.CharField(max_length=100, blank=True)
     content = models.TextField()
     def __str__(self):
         return self.content
 
 class Suggestion(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user', blank=True, default = 1)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='suggestions', blank=True, default=1)
+    username = models.TextField(null=True)
     content = models.TextField()
     category = models.TextField()
     def __str__(self):

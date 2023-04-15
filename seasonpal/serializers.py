@@ -36,17 +36,36 @@ class CustomUserSerializer(serializers.ModelSerializer):
         return instance
 
 
+class SuggestionSerializer(serializers.HyperlinkedModelSerializer):
 
+    user = serializers.HyperlinkedRelatedField(
+        view_name = 'user_detail',
+        read_only=True
+    )
+    
+    suggestion_url = serializers.ModelSerializer.serializer_url_field(
+        view_name = 'suggestion_detail'
+    )
+    class Meta:
+        model = Suggestion
+        fields=('id','suggestion_url', 'username', 'content', 'category', 'user')
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     notes = serializers.HyperlinkedRelatedField(
         view_name = 'note_detail',
+        many=True,
         read_only=True
     )
-    suggestions = serializers.HyperlinkedRelatedField(
-        view_name = 'suggestion_detail',
-        read_only=True
+    # suggestions = serializers.HyperlinkedRelatedField(
+    #     view_name = 'suggestion_detail',
+    #     many=True,
+    #     read_only=True
+    # )
+
+    suggestions = SuggestionSerializer(
+        read_only=True,
+        many=True
     )
     user_url = serializers.ModelSerializer.serializer_url_field(
         view_name = 'user_detail'
@@ -58,20 +77,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 
-
-
-
-class SuggestionSerializer(serializers.HyperlinkedModelSerializer):
-
-    user = UserSerializer(
-        read_only=True
-    )
-    suggestion_url = serializers.ModelSerializer.serializer_url_field(
-        view_name = 'suggestion_detail'
-    )
-    class Meta:
-        model = Suggestion
-        fields=('id','suggestion_url', 'content', 'category', 'user')
 
 
 
