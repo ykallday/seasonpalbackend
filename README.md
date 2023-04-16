@@ -1,6 +1,6 @@
 # SeasonPal
 ## Your new favorite guide for seasonal eating!
-View the live link here: 
+View the live link here: https://seasonpal.netlify.app/
 ## Overview
 The SeasonPal website was designed to encourage people to eat seasonally! Aside from the fact that seasonal produce tends to be fresher, and more delicious and nutritious, eating seasonally is a great way to support local produce and local farming, as well as help the environment. Use this app to plan your shopping list before attending a Farmers Market or grocery store, or while you're planning your meals. Eating seasonally has never been easier! 
 
