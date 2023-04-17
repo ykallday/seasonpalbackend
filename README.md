@@ -25,7 +25,7 @@ I built my database using Django / Python, and I deployed it using Render.
 ### 5. Front End
 I built my Front End application using React.js and TailwindCSS.
 ![Homepage View](/assets/herographic_rm.png "Homepage")
-![Search View](/assets/search.png"Search")
+![Search View](/assets/search.png "Search")
 ### 6. Deployment / Live View
 I deployed my front end using Netlify.
 ### 7. Future Improvements
