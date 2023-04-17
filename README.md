@@ -32,12 +32,17 @@ I deployed my front end using Netlify.
 There are many improvements I'd like to make, and new additions.
 In the near future, I hope to:
 - Create a view that allows user to see the full seasonality of an item within user's location
+- Add more data
 - Share location based resources
 - Complete User JWT Authentication / Authorization
+- Make updates to relational models
+- Tailor initial results to user's saved location
+
 In the further future, I hope to:
 - Reconfigure my database
 - Add more produce
 - Foster a supportive community
+- Implement location services
 
 ## Resources
 ### Informational / Data / Images:
